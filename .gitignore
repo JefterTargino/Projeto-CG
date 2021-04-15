@@ -1,0 +1,29 @@
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.lib
+*.so
+*.d
+*.dll
+*.dylib
+
+# CMake
+CMakeLists.txt.user
+build/
+build.*/
+
+# VS Code
+.vscode/
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Executables
+*.exe
+*.out
+*.app
