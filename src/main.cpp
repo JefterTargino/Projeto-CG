@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ostream>
+#include "gl_wrapper.hpp"
 using std::cout;
 using std::endl;
 
@@ -12,6 +13,9 @@ int main(int argc, char const *argv[]) {
   if (argc == 1) {
     menu();
   }
+
+  // teste
+  wrapper::open_window(600, 600);
 
   return 0;
 }

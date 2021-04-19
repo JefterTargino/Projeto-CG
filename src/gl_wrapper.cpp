@@ -1,15 +1,18 @@
 #include <GL/glut.h>
+#include "gl_wrapper.hpp"
 
-void display() {
+void wrapper::display() {
 
   // apaga as informacoes de cor da renderizacao anterior
   glClear(GL_COLOR_BUFFER_BIT);
   glFlush();
 }
 
-void open_window(int width, int height) {
-    // inicializar as funcoes GLUT
-  //glutInit(&argc, argv);
+void wrapper::open_window(int width, int height) {
+  
+  int argc = 1; char *argv[1] = {(char*)"opengl"}; // glut requer esses parametros
+  glutInit(&argc, argv);
+  
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); // define os metodos de renderizacao
 
   glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-640)/2, // posiciona a janela
@@ -18,6 +21,6 @@ void open_window(int width, int height) {
   glutInitWindowSize(width, height);
   glutCreateWindow("caxeiro viajante");
 
-  glutDisplayFunc(display);
+  glutDisplayFunc(wrapper::display);
   glutMainLoop();
 }
