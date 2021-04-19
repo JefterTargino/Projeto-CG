@@ -14,5 +14,5 @@ set (CMAKE_CXX_FLAGS "-lGL -lglut")
 
 file(GLOB SOURCES "src/*.cpp")
  
-add_executable(caxeiro_viajante ${SOURCES})
+add_executable(caxe ${SOURCES})
 
