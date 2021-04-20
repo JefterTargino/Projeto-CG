@@ -1,18 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
-
-# cmake options
-set (CMAKE_CXX_STANDARD 11)
-
 project(caxeiro)
+set (CMAKE_CXX_STANDARD 11)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
 )
 
-# libs opengl to linker
-set (CMAKE_CXX_FLAGS "-lGL -lglut")
-
+set (CMAKE_CXX_FLAGS "-lGL -lglut") # libs opengl to linker
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "") # export compile_commmands.json
 file(GLOB SOURCES "src/*.cpp")
  
 add_executable(caxe ${SOURCES})
-
