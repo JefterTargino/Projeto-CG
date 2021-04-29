@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 void menu() {
-  cout << "caxeiro viajante - projeto da disciplina de comp. grafica" << endl;
+  cout << "caixeiro viajante - projeto da disciplina de comp. grafica" << endl;
   cout << "Uso: caxe <arquivo de entrada>" << endl;
 }
 
