@@ -1,16 +1,15 @@
+#include <map>
 #include <string>
-#include <vector>
+using std::map;
 using std::string;
-using std::vector;
 
 class Vertice {
-  private:
-      vector<Vertice> vertices;
+  map<string, int> adjacentes;
 
   public:
     string nome;
 
-    void add_vertice(Vertice v) {
-      vertices.push_back(v);
+    void add_vertice(Vertice v, int aresta) {
+      adjacentes[v.nome] = aresta;
     }
 };
