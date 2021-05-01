@@ -35,19 +35,21 @@ class Grafo {
 
   public:
     void add(string v1, string v2, int aresta) {
-      if (vertices.size() > 0) {
-        vector<Vertice>::iterator x;
-        for (x=vertices.begin(); x!=vertices.end(); x++) {
-          if (x->nome == v1) {
-            x->add_vertice(v2, aresta);
-            break;
-          }
-        }
+      bool break_called = false;
 
-      } else {
-        Vertice v(v1);
-        v.add_vertice(v2, aresta);
-        vertices.push_back(v);
+      vector<Vertice>::iterator x;
+      for (x = vertices.begin(); x != vertices.end(); x++) {
+        if (x->nome == v1) {
+          x->add_vertice(v2,  aresta);
+          break_called = true;
+          break;
+        }
+      }
+
+      if (!break_called) {
+        Vertice novo_vertice(v1);
+        novo_vertice.add_vertice(v2, aresta);
+        vertices.push_back(novo_vertice);
       }
     }
 };
