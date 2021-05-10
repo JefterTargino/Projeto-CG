@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ostream>
 #include "gl_wrapper.hpp"
 using std::cout;
 using std::endl;

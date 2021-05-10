@@ -1,55 +1,64 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <vector>
+#include "caxe.hpp"
 using std::cout;
 using std::endl;
 using std::map;
 using std::string;
-using std::vector;
 
-class Vertice {
-  map<string, int> adjacentes;
+// definicao da classe Vertice
+Vertice::Vertice(string n) {
+  nome = n;
+}
 
-  public:
-    string nome;
+void Vertice::add_vertice(Vertice *other_vertice) {
+  adjacentes.emplace(other_vertice->nome, other_vertice);
+}
 
-    Vertice(string n) {
-      nome = n;
+void Vertice::mostrar_adjacentes() {
+  map<string, Vertice*>::iterator x;
+  for (x = adjacentes.begin(); x != adjacentes.end(); x++) {
+    cout << nome << "->" << x->first << endl;
+  }
+}
+
+// definicao da classe Grafo
+int Grafo::find_vertice(string v) {
+  int index = 0;
+  while (index < vertices.size()) {
+    if (vertices[index]->nome == v) {
+      return index;
+    } else {
+      index++;
     }
+  }
 
-    void add_vertice(string nome, int aresta) {
-      adjacentes[nome] = aresta;
+  return -1;
+}
+
+void Grafo::add(string v1, string v2) {
+  int search_v1 = find_vertice(v1);
+  int search_v2 = find_vertice(v2);
+
+  if (search_v1 >= 0) {
+    if (search_v2 >= 0) {
+      // quando tanto v1 quanto v2 já estão dentro do vector
+      vertices[search_v1]->add_vertice(vertices[search_v2]);
+
+    } else {
+      // quando apenas v1 está dentro do vector
+      Vertice* new_v2 = new Vertice(v2);
+      vertices[search_v1]->add_vertice(new_v2);
+      new_v2->add_vertice(vertices[search_v1]);
+      vertices.push_back(new_v2);
     }
-
-    void mostrar_adjacentes() {
-      map<string, int>::iterator x;
-      for (x = adjacentes.begin(); x != adjacentes.end(); x++) {
-        cout << nome << "->" << x->first << endl;
-      }
-    }
-};
-
-class Grafo {
-  vector<Vertice> vertices;
-
-  public:
-    void add(string v1, string v2, int aresta) {
-      bool break_called = false;
-
-      vector<Vertice>::iterator x;
-      for (x = vertices.begin(); x != vertices.end(); x++) {
-        if (x->nome == v1) {
-          x->add_vertice(v2,  aresta);
-          break_called = true;
-          break;
-        }
-      }
-
-      if (!break_called) {
-        Vertice novo_vertice(v1);
-        novo_vertice.add_vertice(v2, aresta);
-        vertices.push_back(novo_vertice);
-      }
-    }
-};
+  } else {
+    // quando v1 e v2 não estão dentro do vector
+    Vertice *new_v1 = new Vertice(v1), *new_v2 = new Vertice(v2);
+    new_v1->add_vertice(new_v2);
+    new_v2->add_vertice(new_v1);
+    vertices.push_back(new_v1);
+    vertices.push_back(new_v2);
+  }
+}
