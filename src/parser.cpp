@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "caxe.hpp"
+#include "parser.hpp"
 using std::ifstream;
 using std::string;
 using std::vector;
