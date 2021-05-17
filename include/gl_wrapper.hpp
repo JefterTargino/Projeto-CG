@@ -1,9 +1,23 @@
 #ifndef GL_WRAPPER
 #define GL_WRAPPER
 
-namespace wrapper {
-  void display();
-  void open_window(int, int);
-}
+#include <string>
+using std::string;
+
+struct VerticePosition {
+  int x;
+  int y;
+  string nome;
+  int cor;
+};
+
+struct ArestaPosition {
+  int x_begin;
+  int y_begin;
+  int x_end;
+  int y_end;
+};
+
+void open_window(int, int, string);
 
 #endif
