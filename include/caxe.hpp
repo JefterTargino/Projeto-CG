@@ -10,12 +10,16 @@ using std::vector;
 
 class Vertice {
   public:
-    map<string, Vertice*> adjacentes;
+    struct Adj {
+      Vertice *ptr_vertice;
+      int dist_aresta;
+    };
+    map<string, Adj*> adjacentes;
     string nome;
     int cor;
 
     Vertice(string);
-    void add_vertice(Vertice*);
+    void add_vertice(Vertice*, int);
     void mostrar_adjacentes();
 };
 
@@ -24,7 +28,7 @@ class Grafo {
     int find_vertice(string);
   public:
     vector<Vertice*> vertices;
-    void add(string, string);
+    void add(string, string, int);
 };
 
 #endif

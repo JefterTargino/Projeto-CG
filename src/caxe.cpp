@@ -12,14 +12,17 @@ Vertice::Vertice(string n) {
   nome = n;
 }
 
-void Vertice::add_vertice(Vertice *other_vertice) {
-  adjacentes.emplace(other_vertice->nome, other_vertice);
+void Vertice::add_vertice(Vertice *other_vertice, int aresta) {
+  Adj *ptr = new Adj;
+  ptr->ptr_vertice = other_vertice;
+  ptr->dist_aresta = aresta;
+  adjacentes.emplace(other_vertice->nome, ptr);
 }
 
 void Vertice::mostrar_adjacentes() {
-  map<string, Vertice*>::iterator x;
+  map<string, Adj*>::iterator x;
   for (x = adjacentes.begin(); x != adjacentes.end(); x++) {
-    cout << nome << "->" << x->first << endl;
+    cout << nome << "->" << x->first << " distancia: " << x->second->dist_aresta << endl;
   }
 }
 
@@ -37,27 +40,27 @@ int Grafo::find_vertice(string v) {
   return -1;
 }
 
-void Grafo::add(string v1, string v2) {
+void Grafo::add(string v1, string v2, int aresta) {
   int search_v1 = find_vertice(v1);
   int search_v2 = find_vertice(v2);
 
   if (search_v1 >= 0) {
     if (search_v2 >= 0) {
       // quando tanto v1 quanto v2 já estão dentro do vector
-      vertices[search_v1]->add_vertice(vertices[search_v2]);
+      vertices[search_v1]->add_vertice(vertices[search_v2], aresta);
 
     } else {
       // quando apenas v1 está dentro do vector
       Vertice* new_v2 = new Vertice(v2);
-      vertices[search_v1]->add_vertice(new_v2);
-      new_v2->add_vertice(vertices[search_v1]);
+      vertices[search_v1]->add_vertice(new_v2, aresta);
+      new_v2->add_vertice(vertices[search_v1], aresta);
       vertices.push_back(new_v2);
     }
   } else {
     // quando v1 e v2 não estão dentro do vector
     Vertice *new_v1 = new Vertice(v1), *new_v2 = new Vertice(v2);
-    new_v1->add_vertice(new_v2);
-    new_v2->add_vertice(new_v1);
+    new_v1->add_vertice(new_v2, aresta);
+    new_v2->add_vertice(new_v1, aresta);
     vertices.push_back(new_v1);
     vertices.push_back(new_v2);
   }
