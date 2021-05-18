@@ -3,7 +3,9 @@
 #include <GL/glut.h>
 #include <vector>
 #include "gl_wrapper.hpp"
+using std::stoi;
 using std::string;
+using std::to_string;
 using std::vector;
 
 vector<VerticePosition*> global_var_vertices;
@@ -53,13 +55,19 @@ void desenhaVertice(int x, int y, string text, int cor) {
   desenhaTexto(str, text.size(), x-4, y-2);
 }
 
-void desenhaAresta(int x_begin, int y_begin, int x_end, int y_end) {
+void desenhaAresta(int x_begin, int y_begin, int x_end, int y_end, int dist) {
   glLineWidth(5.0f);
   glBegin(GL_LINES);
     glColor3f(0.0f, 0.0f, 0.0f);
     glVertex2f(x_begin, y_begin);
     glVertex2f(x_end, y_end);
   glEnd();
+
+  string num = to_string(dist);
+  desenhaTexto(num.c_str(),
+               num.size(),
+               x_begin+((x_end-x_begin)/2),
+               y_begin+((y_end-y_begin)/2)+2);
 }
 
 void Desenha(void) {
@@ -71,7 +79,8 @@ void Desenha(void) {
     desenhaAresta(global_var_arestas[i]->x_begin,
                   global_var_arestas[i]->y_begin,
                   global_var_arestas[i]->x_end,
-                  global_var_arestas[i]->y_end);
+                  global_var_arestas[i]->y_end,
+                  global_var_arestas[i]->dist);
   }
 
   for (int i = 0; i < global_var_vertices.size(); i++) {
