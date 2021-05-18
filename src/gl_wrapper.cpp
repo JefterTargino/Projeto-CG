@@ -41,11 +41,11 @@ void desenhaTexto(const char* text, int length, int x, int y) {
 void desenhaVertice(int x, int y, string text, int cor) {
 // circulo externo
   glColor3f(0.0f, 0.0f, 0.0f);
-  DesenhaCirculo(20, x, y);
+  DesenhaCirculo(15, x, y);
 
   // circulo interno
   glColor3f(1.0f, 1.0f, 1.0f);
-  DesenhaCirculo(16, x, y);
+  DesenhaCirculo(13, x, y);
 
   // texto dentro do vertive
   glColor3f(0.0f, 0.0f, 0.0f);
@@ -54,7 +54,7 @@ void desenhaVertice(int x, int y, string text, int cor) {
 }
 
 void desenhaAresta(int x_begin, int y_begin, int x_end, int y_end) {
-  glLineWidth(25.0f);
+  glLineWidth(5.0f);
   glBegin(GL_LINES);
     glColor3f(0.0f, 0.0f, 0.0f);
     glVertex2f(x_begin, y_begin);
