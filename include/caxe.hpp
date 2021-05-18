@@ -8,13 +8,15 @@ using std::map;
 using std::string;
 using std::vector;
 
+template<typename T>
+struct Adj {
+  T *ptr_vertice;
+  int dist_aresta;
+};
+
 class Vertice {
   public:
-    struct Adj {
-      Vertice *ptr_vertice;
-      int dist_aresta;
-    };
-    map<string, Adj*> adjacentes;
+    map<string, Adj<Vertice>*> adjacentes;
     string nome;
     int cor;
 

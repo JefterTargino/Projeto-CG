@@ -13,14 +13,14 @@ Vertice::Vertice(string n) {
 }
 
 void Vertice::add_vertice(Vertice *other_vertice, int aresta) {
-  Adj *ptr = new Adj;
+  Adj<Vertice> *ptr = new Adj<Vertice>;
   ptr->ptr_vertice = other_vertice;
   ptr->dist_aresta = aresta;
   adjacentes.emplace(other_vertice->nome, ptr);
 }
 
 void Vertice::mostrar_adjacentes() {
-  map<string, Adj*>::iterator x;
+  map<string, Adj<Vertice>*>::iterator x;
   for (x = adjacentes.begin(); x != adjacentes.end(); x++) {
     cout << nome << "->" << x->first << " distancia: " << x->second->dist_aresta << endl;
   }
