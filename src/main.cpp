@@ -9,6 +9,57 @@ using namespace std;
 extern vector<VerticePosition*> global_var_vertices;
 extern vector<ArestaPosition*> global_var_arestas;
 
+VerticePosition *obterPointer(string nome);
+void montarArestas(vector<Vertice*>);
+
+int main(int argc, char const *argv[]) {
+  if (argc == 2) {
+    string arquivo = argv[1];
+    vector<Vertice*> vertices = ler_arquivo(arquivo);
+
+    bool breaked = false;
+    int x_axis = 50;
+    int y_axis = 50;
+    int index = 0;
+
+    while (true) {
+      for (int x=0; x < 3; x++) {
+        if (index < vertices.size()) {
+          VerticePosition *v = new VerticePosition;
+          v->x = x_axis;
+          if (x == 1) {
+            // deslocar a segunda coluna
+            v->y = y_axis-18;
+          } else {
+            v->y = y_axis;
+          }
+          v->nome = vertices[index]->nome;
+          v->cor = vertices[index]->cor;
+          global_var_vertices.push_back(v);
+
+          x_axis += 90;
+          index++;
+
+        } else {
+          breaked = true;
+          break;
+        }
+      }
+
+      if (breaked) {
+        break;
+      } else {
+        x_axis = 50;
+        y_axis += 100;
+      }
+    }
+    montarArestas(vertices);
+    open_window(700, 500, "string");
+  }
+
+  return 0;
+}
+
 VerticePosition *obterPointer(string nome) {
   VerticePosition *p = nullptr;
   for (int it = 0; it < global_var_vertices.size(); it++) {
@@ -35,52 +86,4 @@ void montarArestas(vector<Vertice*> vertices) {
       global_var_arestas.push_back(aresta);
     }
   }
-}
-
-int main(int argc, char const *argv[]) {
-  if (argc == 2) {
-    string arquivo = argv[1];
-    vector<Vertice*> vertices = ler_arquivo(arquivo);
-
-    bool breaked = false;
-    int x_axis = 100;
-    int y_axis = 100;
-    int index = 0;
-
-    while (true) {
-      for (int x=0; x < 3; x++) {
-        if (index < vertices.size()) {
-          VerticePosition *v = new VerticePosition;
-          v->x = x_axis;
-          if (x == 1) {
-            // deslocar a segunda coluna
-            v->y = y_axis-30;
-          } else {
-            v->y = y_axis;
-          }
-          v->nome = vertices[index]->nome;
-          v->cor = vertices[index]->cor;
-          global_var_vertices.push_back(v);
-
-          x_axis += 80;
-          index++;
-
-        } else {
-          breaked = true;
-          break;
-        }
-      }
-
-      if (breaked) {
-        break;
-      } else {
-        x_axis = 100;
-        y_axis += 80;
-      }
-    }
-    montarArestas(vertices);
-    open_window(700, 500, "string");
-  }
-
-  return 0;
 }

@@ -3,7 +3,6 @@
 #include <GL/glut.h>
 #include <vector>
 #include "gl_wrapper.hpp"
-using std::stoi;
 using std::string;
 using std::to_string;
 using std::vector;
@@ -67,7 +66,7 @@ void desenhaAresta(int x_begin, int y_begin, int x_end, int y_end, int dist) {
   desenhaTexto(num.c_str(),
                num.size(),
                x_begin+((x_end-x_begin)/2),
-               y_begin+((y_end-y_begin)/2)+2);
+               y_begin+((y_end-y_begin)/2));
 }
 
 void Desenha(void) {
