@@ -110,16 +110,14 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h) {
     gluOrtho2D (0.0f, 250.0f*w/h, 0.0f, 250.0f);
 }
 
-void open_window(int width, int height, string nome_janela) {
-  // ponto de entrada das funções do opengl
-
-  int argc = 1; char *argv[1] = {(char*)"opengl"}; // glut requer esses parametros
+void window(int width, int height) {
+  int argc = 1; char *argv[1] = {(char*)""}; // parametros do glutinit
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); // define os metodos de renderizacao
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
   glutInitWindowSize(width, height);
-  glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-640)/2, // posiciona a janela
-                       (glutGet(GLUT_SCREEN_HEIGHT)-480)/2); // no centro da tela
-  glutCreateWindow(nome_janela.c_str());
+  glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-640)/2,
+                       (glutGet(GLUT_SCREEN_HEIGHT)-480)/2);
+  glutCreateWindow("caixeiro viajante");
   glutDisplayFunc(Draw);
   glutReshapeFunc(AlteraTamanhoJanela);
   glutMainLoop();

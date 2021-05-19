@@ -20,6 +20,6 @@ struct ArestaStruct {
   int cor;
 };
 
-void open_window(int, int, string);
+void window(int, int);
 
 #endif

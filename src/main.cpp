@@ -57,7 +57,7 @@ int main(int argc, char const *argv[]) {
       }
     }
     createArestas(vertices, v_passados);
-    open_window(700, 500, "string");
+    window(700, 500);
   }
 
   return 0;
