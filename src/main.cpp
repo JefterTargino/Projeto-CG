@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "caxe.hpp"
-#include "gl_wrapper.hpp"
+#include "gl_code.hpp"
 #include "parser.hpp"
 using namespace std;
 

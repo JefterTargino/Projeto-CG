@@ -2,7 +2,7 @@
 #include <string>
 #include <GL/glut.h>
 #include <vector>
-#include "gl_wrapper.hpp"
+#include "gl_code.hpp"
 using namespace std;
 
 vector<VerticeStruct*> GLOBAL_VERTICES;

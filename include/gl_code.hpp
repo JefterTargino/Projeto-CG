@@ -1,5 +1,5 @@
-#ifndef GL_WRAPPER
-#define GL_WRAPPER
+#ifndef GL_CODE
+#define GL_CODE
 
 #include <string>
 using std::string;
