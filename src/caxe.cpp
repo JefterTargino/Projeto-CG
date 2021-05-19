@@ -1,11 +1,13 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <vector>
 #include "caxe.hpp"
 using std::cout;
 using std::endl;
 using std::map;
 using std::string;
+using std::vector;
 
 // definicao da classe Vertice
 Vertice::Vertice(string n) {
@@ -64,4 +66,55 @@ void Grafo::add(string v1, string v2, int aresta) {
     vertices.push_back(new_v1);
     vertices.push_back(new_v2);
   }
+}
+
+int get_index(string value, vector<string> v) {
+  for (int x = 0; x < v.size(); x++) {
+    if (v[x] == value) {
+      return  x;
+    }
+  }
+  return -1;
+}
+
+vector<string> vertices_disponiveis(vector<string> v_passados, map<string, Adj<Vertice>*> adj) {
+  vector<string> v_disponiveis;
+  map<string, Adj<Vertice>*>::iterator it;
+  for (it=adj.begin(); it != adj.end(); it++) {
+    v_disponiveis.push_back(it->first);
+  }
+
+  for (int x=0; x < v_passados.size(); x++) {
+    int seach_result = get_index(v_passados[x], v_disponiveis);
+    if (seach_result > -1) {
+      v_disponiveis.erase(v_disponiveis.begin() +seach_result);
+    }
+  }
+
+  return v_disponiveis;
+}
+
+void menor_caminho(Vertice v, vector<string> &v_passados) {
+  v_passados.push_back(v.nome);
+  vector<string> v_disponiveis = vertices_disponiveis(v_passados, v.adjacentes);
+
+  string v_menor = "";
+  int dist_menor = 0;
+  for (int x=0; x < v_disponiveis.size(); x++) {
+    if (dist_menor == 0) {
+      v_menor = v_disponiveis[x];
+      dist_menor = v.adjacentes[v_disponiveis[x]]->dist_aresta;
+
+    } else if (dist_menor > v.adjacentes[v_disponiveis[x]]->dist_aresta) {
+      v_menor = v_disponiveis[x];
+      dist_menor = v.adjacentes[v_disponiveis[x]]->dist_aresta;
+    }
+  }
+
+  if (v_menor != "") {
+    menor_caminho(*v.adjacentes[v_menor]->ptr_vertice, v_passados);
+  } else {
+    v_passados.push_back(v_passados[0]);
+  }
+
 }

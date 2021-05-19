@@ -33,4 +33,6 @@ class Grafo {
     void add(string, string, int);
 };
 
+void menor_caminho(Vertice, vector<string> &);
+
 #endif
