@@ -20,10 +20,6 @@ int main(int argc, char const *argv[]) {
     vector<string> v_passados;
     menor_caminho(*vertices[0], v_passados);
 
-    for (int x = 0; x < v_passados.size(); x++) {
-      cout << v_passados[x] << endl;
-    }
-
     bool breaked = false;
     int x_axis = 50;
     int y_axis = 50;
@@ -78,25 +74,17 @@ VerticePosition *obterPointer(string nome) {
 }
 
 bool checkAresta(string v1, string v2, vector<string> vertices) {
-  int search_v1 = get_index(v1, vertices);
-  int search_v2 = get_index(v2, vertices);
-  cout << "v1 " << search_v1 << " v2 " << search_v2 << endl;
-
-  if (search_v1 > -1 && search_v2 > -1) {
-    if ((search_v1 == search_v2+1) || (search_v1 == search_v2-1)) {
-      cout << "true" << endl;
+  for (int x = 0; x < vertices.size()-1; x++) {
+    if ((vertices[x] == v1 && vertices[x+1] == v2) ||
+        (vertices[x] == v2 && vertices[x+1] == v1)) {
       return true;
-    } else {
-      cout << "false" << endl;
-      return false;
     }
-  } else {
-    return false;
   }
+  return false;
 }
 
 void montarArestas(vector<Vertice*> vertices, vector<string> v_passados) {
-  for (int x = 0; x != vertices.size(); x++) {
+  for (int x = 0; x < vertices.size(); x++) {
     VerticePosition *v = obterPointer(vertices[x]->nome);
 
     map<string, Adj<Vertice>*>::iterator it;
@@ -108,11 +96,12 @@ void montarArestas(vector<Vertice*> vertices, vector<string> v_passados) {
       aresta->x_end = v_adjacente->x;
       aresta->y_end = v_adjacente->y;
       aresta->dist = it->second->dist_aresta;
-      if (checkAresta(vertices[x]->nome, v_adjacente->nome, v_passados)) {
+      if (checkAresta(v->nome, v_adjacente->nome, v_passados)) {
         aresta->cor = 1;
       } else {
         aresta->cor = 0;
       }
+      //cout << v->nome << " " << v_adjacente->nome << " " << aresta->cor << endl;
       global_var_arestas.push_back(aresta);
     }
   }
