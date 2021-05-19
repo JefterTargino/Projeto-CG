@@ -33,6 +33,8 @@ class Grafo {
     void add(string, string, int);
 };
 
+int get_index(string value, vector<string> v);
+
 void menor_caminho(Vertice, vector<string> &);
 
 #endif

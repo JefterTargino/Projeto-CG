@@ -54,10 +54,14 @@ void desenhaVertice(int x, int y, string text, int cor) {
   desenhaTexto(str, text.size(), x-4, y-2);
 }
 
-void desenhaAresta(int x_begin, int y_begin, int x_end, int y_end, int dist) {
+void desenhaAresta(int x_begin, int y_begin, int x_end, int y_end, int dist, int cor) {
   glLineWidth(5.0f);
   glBegin(GL_LINES);
-    glColor3f(0.0f, 0.0f, 0.0f);
+    if (cor == 0) {
+      glColor3f(0.0f, 0.0f, 0.0f); // preto
+    } else {
+      glColor3f(1.0f, 0.0f, 0.0f); // vermelho
+    }
     glVertex2f(x_begin, y_begin);
     glVertex2f(x_end, y_end);
   glEnd();
@@ -79,7 +83,8 @@ void Desenha(void) {
                   global_var_arestas[i]->y_begin,
                   global_var_arestas[i]->x_end,
                   global_var_arestas[i]->y_end,
-                  global_var_arestas[i]->dist);
+                  global_var_arestas[i]->dist,
+                  global_var_arestas[i]->cor);
   }
 
   for (int i = 0; i < global_var_vertices.size(); i++) {
