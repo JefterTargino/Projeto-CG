@@ -15,6 +15,7 @@
 CMakeLists.txt.user
 build/
 build.*/
+.cache
 
 # VS Code
 .vscode/
