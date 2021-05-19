@@ -3,13 +3,8 @@
 #include <string>
 #include <vector>
 #include "caxe.hpp"
-using std::cout;
-using std::endl;
-using std::map;
-using std::string;
-using std::vector;
+using namespace std;
 
-// definicao da classe Vertice
 Vertice::Vertice(string n) {
   nome = n;
 }
@@ -21,14 +16,6 @@ void Vertice::add_vertice(Vertice *other_vertice, int aresta) {
   adjacentes.emplace(other_vertice->nome, ptr);
 }
 
-void Vertice::mostrar_adjacentes() {
-  map<string, Adj<Vertice>*>::iterator x;
-  for (x = adjacentes.begin(); x != adjacentes.end(); x++) {
-    cout << nome << "->" << x->first << " distancia: " << x->second->dist_aresta << endl;
-  }
-}
-
-// definicao da classe Grafo
 int Grafo::find_vertice(string v) {
   int index = 0;
   while (index < vertices.size()) {
@@ -48,18 +35,18 @@ void Grafo::add(string v1, string v2, int aresta) {
 
   if (search_v1 >= 0) {
     if (search_v2 >= 0) {
-      // quando tanto v1 quanto v2 já estão dentro do vector
+      // v1 e v2 estão dentro do vector
       vertices[search_v1]->add_vertice(vertices[search_v2], aresta);
 
     } else {
-      // quando apenas v1 está dentro do vector
+      // apenas v1 está dentro do vector
       Vertice* new_v2 = new Vertice(v2);
       vertices[search_v1]->add_vertice(new_v2, aresta);
       new_v2->add_vertice(vertices[search_v1], aresta);
       vertices.push_back(new_v2);
     }
   } else {
-    // quando v1 e v2 não estão dentro do vector
+    // nenhum está dentro do vetor
     Vertice *new_v1 = new Vertice(v1), *new_v2 = new Vertice(v2);
     new_v1->add_vertice(new_v2, aresta);
     new_v2->add_vertice(new_v1, aresta);

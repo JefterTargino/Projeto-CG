@@ -4,14 +4,14 @@
 #include <string>
 using std::string;
 
-struct VerticePosition {
+struct VerticeStruct {
   int x;
   int y;
   string nome;
   int cor;
 };
 
-struct ArestaPosition {
+struct ArestaStruct {
   int x_begin;
   int y_begin;
   int x_end;

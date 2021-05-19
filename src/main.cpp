@@ -6,11 +6,11 @@
 #include "parser.hpp"
 using namespace std;
 
-extern vector<VerticePosition*> global_var_vertices;
-extern vector<ArestaPosition*> global_var_arestas;
+extern vector<VerticeStruct*> GLOBAL_VERTICES;
+extern vector<ArestaStruct*> GLOBAL_ARESTAS;
 
-VerticePosition *obterPointer(string nome);
-void montarArestas(vector<Vertice*>, vector<string>);
+VerticeStruct *get_pointer(string nome);
+void createArestas(vector<Vertice*>, vector<string>);
 
 int main(int argc, char const *argv[]) {
   if (argc == 2) {
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
     while (true) {
       for (int x=0; x < 3; x++) {
         if (index < vertices.size()) {
-          VerticePosition *v = new VerticePosition;
+          VerticeStruct *v = new VerticeStruct;
           v->x = x_axis;
           if (x == 1) {
             // deslocar a segunda coluna
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
           }
           v->nome = vertices[index]->nome;
           v->cor = vertices[index]->cor;
-          global_var_vertices.push_back(v);
+          GLOBAL_VERTICES.push_back(v);
 
           x_axis += 90;
           index++;
@@ -56,18 +56,18 @@ int main(int argc, char const *argv[]) {
         y_axis += 100;
       }
     }
-    montarArestas(vertices, v_passados);
+    createArestas(vertices, v_passados);
     open_window(700, 500, "string");
   }
 
   return 0;
 }
 
-VerticePosition *obterPointer(string nome) {
-  VerticePosition *p = nullptr;
-  for (int it = 0; it < global_var_vertices.size(); it++) {
-    if(global_var_vertices[it]->nome == nome) {
-      p = global_var_vertices[it];
+VerticeStruct *get_pointer(string nome) {
+  VerticeStruct *p = nullptr;
+  for (int it = 0; it < GLOBAL_VERTICES.size(); it++) {
+    if(GLOBAL_VERTICES[it]->nome == nome) {
+      p = GLOBAL_VERTICES[it];
     }
   }
   return p;
@@ -83,14 +83,14 @@ bool checkAresta(string v1, string v2, vector<string> vertices) {
   return false;
 }
 
-void montarArestas(vector<Vertice*> vertices, vector<string> v_passados) {
+void createArestas(vector<Vertice*> vertices, vector<string> v_passados) {
   for (int x = 0; x < vertices.size(); x++) {
-    VerticePosition *v = obterPointer(vertices[x]->nome);
+    VerticeStruct *v = get_pointer(vertices[x]->nome);
 
     map<string, Adj<Vertice>*>::iterator it;
     for (it = vertices[x]->adjacentes.begin(); it != vertices[x]->adjacentes.end(); it++) {
-      VerticePosition *v_adjacente = obterPointer(it->first);
-      ArestaPosition *aresta = new ArestaPosition;
+      VerticeStruct *v_adjacente = get_pointer(it->first);
+      ArestaStruct *aresta = new ArestaStruct;
       aresta->x_begin = v->x;
       aresta->y_begin = v->y;
       aresta->x_end = v_adjacente->x;
@@ -102,7 +102,7 @@ void montarArestas(vector<Vertice*> vertices, vector<string> v_passados) {
         aresta->cor = 0;
       }
       //cout << v->nome << " " << v_adjacente->nome << " " << aresta->cor << endl;
-      global_var_arestas.push_back(aresta);
+      GLOBAL_ARESTAS.push_back(aresta);
     }
   }
 }

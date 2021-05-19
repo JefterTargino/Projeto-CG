@@ -22,7 +22,6 @@ class Vertice {
 
     Vertice(string);
     void add_vertice(Vertice*, int);
-    void mostrar_adjacentes();
 };
 
 class Grafo {
