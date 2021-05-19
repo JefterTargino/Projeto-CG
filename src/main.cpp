@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]) {
           VerticeStruct *v = new VerticeStruct;
           v->x = x_axis;
           if (x == 1) {
-            // deslocar a segunda coluna
+            // descer a segunda coluna
             v->y = y_axis-18;
           } else {
             v->y = y_axis;
